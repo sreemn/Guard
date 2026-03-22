@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vylee</title>
 
   <style>
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      font-family: ui-sans-serif, system-ui, sans-serif;
       background: #fff;
       color: #000;
       display: flex;
@@ -56,19 +56,37 @@
       max-width: 400px;
     }
 
+    /* 🔥 BUTTON FIXED */
     .btn {
       margin-top: 28px;
       padding: 12px 18px;
       border-radius: 12px;
       border: 1px solid #e5e5e5;
       background: #f5f5f5;
+      color: #000;
       cursor: pointer;
       transition: 0.2s;
       font-size: 14px;
+
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
     }
 
     .btn:hover {
       background: #eaeaea;
+    }
+
+    .btn:active,
+    .btn:focus {
+      background: #f5f5f5;
+      color: #000;
+      outline: none;
+    }
+
+    /* remove blue tap highlight */
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
 
     .page {
@@ -106,18 +124,17 @@
       font-family: monospace;
     }
 
+    /* mobile nav + heading */
     @media (max-width: 480px) {
       .nav-left span {
-      font-size: 17px;
-      letter-spacing: -0.01em;
+        font-size: 17px;
+        letter-spacing: -0.01em;
       }
-     }
 
-    @media (max-width: 480px) {
       h1 {
         font-size: 26px;
       }
-     }
+    }
 
     @media (min-width: 768px) {
       h1 {
@@ -145,41 +162,37 @@
 </head>
 
 <body>
+
   <div class="nav">
     <div class="nav-left">
       <span onclick="goDocs()">Docs</span>
       <span onclick="showPayment()">Donate</span>
       <span onclick="goSupport()">Support</span>
-     </div>
+    </div>
   </div>
 
   <div id="home" class="container page active">
     <h1>Start building with Vylee</h1>
-    <div class="sub">
-      Designed to work seamlessly.
-    </div>
+    <div class="sub">Designed to work seamlessly.</div>
     <button class="btn" onclick="showPayment()">Donate</button>
   </div>
 
   <div id="payment" class="container page">
     <h1>Complete your donation</h1>
-
     <pre><code>Proceed to secure payment</code></pre>
-
     <button class="btn" onclick="pay()">Continue</button>
-
     <div id="status" class="status"></div>
   </div>
 
   <script>
     function goDocs() {
       window.location.href = "https://vylee.vercel.app/docs";
-     }
+    }
 
-     function goSupport() {
-       window.open("https://discord.gg/2edfghjkh", "_blank");
-      }
-    
+    function goSupport() {
+      window.open("https://discord.gg/2edfghjkh", "_blank");
+    }
+
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
 
     function showPayment() {
@@ -199,17 +212,18 @@
       if (status === "success") {
         showPayment();
         el.innerText = "Payment successful.";
-        el.classList.add("success");
+        el.className = "status success";
       }
 
       if (status === "failed") {
         showPayment();
         el.innerText = "Payment failed. Please try again!";
-        el.classList.add("failed");
+        el.className = "status failed";
       }
     }
 
     checkStatus();
   </script>
+
 </body>
 </html>
