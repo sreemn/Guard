@@ -64,12 +64,16 @@
 
     .nav-left span {
       cursor: pointer;
-      font-family: "DM Sans", sans-serif;
       transition: opacity 0.2s;
     }
 
     .nav-left span:hover {
       opacity: 0.6;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
     }
 
     .add-btn {
@@ -82,10 +86,12 @@
       background: #f5f5f5;
       color: #000;
       font-size: 14px;
-      font-family: "DM Sans", sans-serif;
       cursor: pointer;
       transition: 0.2s;
-      letter-spacing: -0.01em;
+    }
+
+    .add-btn:hover {
+      background: #eaeaea;
     }
 
     .add-btn svg {
@@ -94,16 +100,8 @@
       transition: transform 0.2s;
     }
 
-    .add-btn:hover {
-      background: #eaeaea;
-    }
-
     .add-btn:hover svg {
       transform: translate(2px, -2px);
-    }
-
-    .add-btn:active {
-      transform: scale(0.96);
     }
 
     .container {
@@ -111,8 +109,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       flex-direction: column;
+      text-align: center;
       padding: 20px;
     }
 
@@ -120,8 +118,6 @@
       font-family: "Smythe", serif;
       font-size: 44px;
       margin: 0;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
     }
 
     .sub {
@@ -129,7 +125,6 @@
       font-size: 15px;
       color: #666;
       max-width: 400px;
-      font-family: "DM Sans", sans-serif;
     }
 
     .btn {
@@ -138,52 +133,109 @@
       border-radius: 22px;
       border: 1px solid #e5e5e5;
       background: #f5f5f5;
-      color: #000;
       cursor: pointer;
-      font-size: 16px;
-      font-family: "DM Sans", sans-serif;
-      transition: 0.2s;
-      letter-spacing: -0.01em;
     }
 
     .btn:hover {
       background: #eaeaea;
     }
 
-    .btn:active {
-      transform: scale(0.97);
+    .page {
+      display: none;
     }
 
-    * {
-      -webkit-tap-highlight-color: transparent;
+    .active {
+      display: flex;
     }
 
-    .page { display: none; }
-    .active { display: flex; }
-
-    .status { margin-top: 18px; font-size: 14px; font-family: "DM Sans"; }
-    .success { color: #16a34a; }
-    .failed { color: #dc2626; }
-
-    pre {
-      margin-top: 20px;
-      padding: 12px 16px;
-      background: #f5f5f5;
-      border-radius: 12px;
-      border: 1px solid #eee;
-      font-size: 13px;
-      overflow-x: auto;
-      font-family: monospace;
+    .status {
+      margin-top: 18px;
+      font-size: 14px;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 30px; }
+    .success {
+      color: #16a34a;
+    }
+
+    .failed {
+      color: #dc2626;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: 90%;
+      max-width: 720px;
+      border-radius: 24px;
+      padding: 40px;
+      background: linear-gradient(135deg, #1f1f23, #2c2c32);
+      color: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: pop 0.25s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal h1 {
+      font-size: 32px;
+      margin: 0;
+    }
+
+    .modal p {
+      margin-top: 12px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #5b6cff, #7c8cff);
+      color: #fff;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 14px;
+      cursor: pointer;
     }
 
     @media (min-width: 768px) {
       h1 { font-size: 56px; }
       .nav { padding: 20px 40px; }
-      .nav-left { gap: 24px; }
     }
   </style>
 </head>
@@ -197,12 +249,21 @@
       <span onclick="goSupport()">Support</span>
     </div>
 
-    <button class="add-btn" onclick="addBot()">
-      Add Bot
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
+    <div class="nav-right">
+      <button class="add-btn" onclick="openDashboard()">
+        Dashboard
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="add-btn" onclick="addBot()">
+        Add Bot
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
   </div>
 
   <div id="home" class="container page active">
@@ -218,6 +279,20 @@
     <div id="status" class="status"></div>
   </div>
 
+  <div id="overlay" class="overlay">
+    <div class="modal">
+      <h1>Under construction</h1>
+      <p>
+        The dashboard is currently being built. We're working on bringing everything together into a seamless experience.
+      </p>
+
+      <div class="modal-actions">
+        <button class="btn-outline" onclick="goDashboard()">Dashboard ↗</button>
+        <button class="btn-primary" onclick="addBot()">Add to your server</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     function goDocs() {
       window.location.href = "https://vylee.vercel.app/docs";
@@ -229,6 +304,14 @@
 
     function addBot() {
       window.open("https://discord.com/oauth2/authorize?client_id=1479942416676028579&permissions=8&scope=bot%20applications.commands", "_blank");
+    }
+
+    function openDashboard() {
+      document.getElementById("overlay").classList.add("show");
+    }
+
+    function goDashboard() {
+      window.open("https://your-dashboard-link.com", "_blank");
     }
 
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
@@ -259,6 +342,12 @@
         el.className = "status failed";
       }
     }
+
+    document.getElementById("overlay").addEventListener("click", (e) => {
+      if (e.target.id === "overlay") {
+        e.target.classList.remove("show");
+      }
+    });
 
     checkStatus();
   </script>
