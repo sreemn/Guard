@@ -16,7 +16,6 @@
   <meta property="og:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://vylee.vercel.app/">
   <meta name="twitter:title" content="Vylee">
   <meta name="twitter:description" content="Designed to work seamlessly.">
   <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
@@ -25,6 +24,14 @@
   <meta name="theme-color" content="#000000">
 
   <style>
+    @font-face {
+      font-family: "Smythe";
+      src: url("https://reminders.click/_woff/v2/Smythe-Regular_1/Smythe-Regular_1-english.woff2") format("woff2");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
     body {
       margin: 0;
       font-family: ui-sans-serif, system-ui, sans-serif;
@@ -89,10 +96,12 @@
     }
 
     h1 {
-      font-size: 32px;
-      font-weight: 600;
+      font-family: "Smythe", serif;
+      font-size: 42px;
+      font-weight: normal;
       margin: 0;
-      line-height: 1.2;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
     }
 
     .sub {
@@ -168,19 +177,14 @@
     }
 
     @media (max-width: 480px) {
-      .nav-left span {
-        font-size: 17px;
-        letter-spacing: -0.01em;
-      }
-
       h1 {
-        font-size: 26px;
+        font-size: 30px;
       }
     }
 
     @media (min-width: 768px) {
       h1 {
-        font-size: 44px;
+        font-size: 56px;
       }
 
       .sub {
