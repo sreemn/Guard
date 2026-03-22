@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vylee</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+      background: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      font-size: 14px;
+    }
+
+    .nav-left {
+      display: flex;
+      gap: 16px;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .sub {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #666;
+      max-width: 400px;
+    }
+
+    .btn {
+      margin-top: 28px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+      background: #f5f5f5;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #eaeaea;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    .status {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .success {
+      color: #16a34a;
+    }
+
+    .failed {
+      color: #dc2626;
+    }
+
+    pre {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: monospace;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 44px;
+      }
+
+      .sub {
+        font-size: 16px;
+      }
+
+      .nav {
+        padding: 20px 40px;
+      }
+
+      .nav-left {
+        gap: 24px;
+      }
+
+      .btn {
+        font-size: 15px;
+        padding: 12px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-left">
+      <span>Docs</span>
+      <span>Donate</span>
+      <span>Support</span>
+    </div>
+  </div>
+
+  <div id="home" class="container page active">
+    <h1>Start building with Vylee</h1>
+    <div class="sub">
+      Designed to work seamlessly.
+    </div>
+    <button class="btn" onclick="showPayment()">Donate</button>
+  </div>
+
+  <div id="payment" class="container page">
+    <h1>Complete your donation</h1>
+
+    <pre><code>Proceed to secure payment</code></pre>
+
+    <button class="btn" onclick="pay()">Continue</button>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
+
+    function showPayment() {
+      document.getElementById("home").classList.remove("active");
+      document.getElementById("payment").classList.add("active");
+    }
+
+    function pay() {
+      window.location.href = PAYMENT_LINK;
+    }
+
+    function checkStatus() {
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get("status");
+      const el = document.getElementById("status");
+
+      if (status === "success") {
+        showPayment();
+        el.innerText = "Payment successful. Send proof in Discord.";
+        el.classList.add("success");
+      }
+
+      if (status === "failed") {
+        showPayment();
+        el.innerText = "Payment failed. Please try again.";
+        el.classList.add("failed");
+      }
+    }
+
+    checkStatus();
+  </script>
+</body>
+</html>
