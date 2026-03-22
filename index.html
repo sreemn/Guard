@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Vylee</title>
+
   <meta name="title" content="Vylee">
   <meta name="description" content="Designed to work seamlessly.">
 
@@ -10,15 +13,16 @@
   <meta property="og:url" content="https://vylee.vercel.app/">
   <meta property="og:title" content="Vylee">
   <meta property="og:description" content="Designed to work seamlessly.">
-  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png?ex=69c19763&is=69c045e3&hm=98c5627f7f9ed0b4b78638e7063b0a4ed01c68778022f0ce5ed4d64e702bb489&">
+  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://vylee.vercel.app/">
   <meta name="twitter:title" content="Vylee">
   <meta name="twitter:description" content="Designed to work seamlessly.">
-  <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png?ex=69c19763&is=69c045e3&hm=98c5627f7f9ed0b4b78638e7063b0a4ed01c68778022f0ce5ed4d64e702bb489&">
-  
-  <title>Vylee</title>
+  <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#000000">
 
   <style>
     body {
@@ -47,6 +51,33 @@
       flex-wrap: wrap;
     }
 
+    .add-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #e5e5e5;
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .add-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .add-btn:hover {
+      opacity: 0.85;
+    }
+
+    .add-btn:active {
+      transform: scale(0.96);
+    }
+
     .container {
       flex: 1;
       display: flex;
@@ -71,7 +102,6 @@
       max-width: 400px;
     }
 
-    /* 🔥 BUTTON FIXED */
     .btn {
       margin-top: 28px;
       padding: 12px 18px;
@@ -82,7 +112,6 @@
       cursor: pointer;
       transition: 0.2s;
       font-size: 14px;
-
       -webkit-appearance: none;
       appearance: none;
       outline: none;
@@ -99,7 +128,6 @@
       outline: none;
     }
 
-    /* remove blue tap highlight */
     * {
       -webkit-tap-highlight-color: transparent;
     }
@@ -139,7 +167,6 @@
       font-family: monospace;
     }
 
-    /* mobile nav + heading */
     @media (max-width: 480px) {
       .nav-left span {
         font-size: 17px;
@@ -184,6 +211,13 @@
       <span onclick="showPayment()">Donate</span>
       <span onclick="goSupport()">Support</span>
     </div>
+
+    <button class="add-btn" onclick="addBot()">
+      Add Bot
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
 
   <div id="home" class="container page active">
@@ -206,6 +240,10 @@
 
     function goSupport() {
       window.open("https://discord.gg/2edfghjkh", "_blank");
+    }
+
+    function addBot() {
+      window.open("https://discord.com/oauth2/authorize?client_id=1479942416676028579", "_blank");
     }
 
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
