@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+I want like this only ( <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vylee</title>
 
   <style>
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
       background: #fff;
       color: #000;
       display: flex;
@@ -26,18 +26,9 @@
 
     .nav-left {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       font-weight: 500;
-    }
-
-    .nav-left a {
-      text-decoration: none;
-      color: #000;
-      transition: 0.2s;
-    }
-
-    .nav-left a:hover {
-      opacity: 0.6;
+      flex-wrap: wrap;
     }
 
     .container {
@@ -51,15 +42,17 @@
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 600;
       margin: 0;
+      line-height: 1.2;
     }
 
     .sub {
       margin-top: 10px;
       font-size: 15px;
       color: #666;
+      max-width: 400px;
     }
 
     .btn {
@@ -70,6 +63,7 @@
       background: #f5f5f5;
       cursor: pointer;
       transition: 0.2s;
+      font-size: 14px;
     }
 
     .btn:hover {
@@ -89,35 +83,89 @@
       font-size: 14px;
     }
 
-    .success { color: #16a34a; }
-    .failed { color: #dc2626; }
+    .success {
+      color: #16a34a;
+    }
+
+    .failed {
+      color: #dc2626;
+    }
+
+    pre {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: monospace;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 44px;
+      }
+
+      .sub {
+        font-size: 16px;
+      }
+
+      .nav {
+        padding: 20px 40px;
+      }
+
+      .nav-left {
+        gap: 24px;
+      }
+
+      .btn {
+        font-size: 15px;
+        padding: 12px 22px;
+      }
+    }
   </style>
 </head>
 
 <body>
-
   <div class="nav">
     <div class="nav-left">
-      <a href="https://vylee.vercel.app/docs">Docs</a>
-      <a href="#" onclick="showPayment(); return false;">Donate</a>
-      <a href="https://discord.gg/2edfghjkh" target="_blank">Support</a>
-    </div>
+      <span onclick="goDocs()">Docs</span>
+      <span onclick="showPayment()">Donate</span>
+      <span onclick="goSupport()">Support</span>
+     </div>
   </div>
 
   <div id="home" class="container page active">
     <h1>Start building with Vylee</h1>
-    <div class="sub">Designed to work seamlessly.</div>
+    <div class="sub">
+      Designed to work seamlessly.
+    </div>
     <button class="btn" onclick="showPayment()">Donate</button>
   </div>
 
   <div id="payment" class="container page">
     <h1>Complete your donation</h1>
+
     <pre><code>Proceed to secure payment</code></pre>
+
     <button class="btn" onclick="pay()">Continue</button>
+
     <div id="status" class="status"></div>
   </div>
 
   <script>
+    function goDocs() {
+      window.location.href = "https://vylee.vercel.app/docs";
+     }
+
+     function goSupport() {
+       window.open("https://discord.gg/2edfghjkh", "_blank");
+      }
+    
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
 
     function showPayment() {
@@ -137,18 +185,17 @@
       if (status === "success") {
         showPayment();
         el.innerText = "Payment successful.";
-        el.className = "status success";
+        el.classList.add("success");
       }
 
       if (status === "failed") {
         showPayment();
         el.innerText = "Payment failed. Please try again!";
-        el.className = "status failed";
+        el.classList.add("failed");
       }
     }
 
     checkStatus();
   </script>
-
 </body>
-</html>
+</html> )
