@@ -64,16 +64,12 @@
 
     .nav-left span {
       cursor: pointer;
+      font-family: "DM Sans", sans-serif;
       transition: opacity 0.2s;
     }
 
     .nav-left span:hover {
       opacity: 0.6;
-    }
-
-    .nav-right {
-      display: flex;
-      gap: 10px;
     }
 
     .add-btn {
@@ -86,12 +82,10 @@
       background: #f5f5f5;
       color: #000;
       font-size: 14px;
+      font-family: "DM Sans", sans-serif;
       cursor: pointer;
       transition: 0.2s;
-    }
-
-    .add-btn:hover {
-      background: #eaeaea;
+      letter-spacing: -0.01em;
     }
 
     .add-btn svg {
@@ -100,8 +94,16 @@
       transition: transform 0.2s;
     }
 
+    .add-btn:hover {
+      background: #eaeaea;
+    }
+
     .add-btn:hover svg {
       transform: translate(2px, -2px);
+    }
+
+    .add-btn:active {
+      transform: scale(0.96);
     }
 
     .container {
@@ -109,8 +111,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       text-align: center;
+      flex-direction: column;
       padding: 20px;
     }
 
@@ -118,6 +120,8 @@
       font-family: "Smythe", serif;
       font-size: 44px;
       margin: 0;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
     }
 
     .sub {
@@ -125,6 +129,7 @@
       font-size: 15px;
       color: #666;
       max-width: 400px;
+      font-family: "DM Sans", sans-serif;
     }
 
     .btn {
@@ -133,114 +138,52 @@
       border-radius: 22px;
       border: 1px solid #e5e5e5;
       background: #f5f5f5;
+      color: #000;
       cursor: pointer;
+      font-size: 16px;
+      font-family: "DM Sans", sans-serif;
+      transition: 0.2s;
+      letter-spacing: -0.01em;
     }
 
     .btn:hover {
       background: #eaeaea;
     }
 
-    .page {
-      display: none;
+    .btn:active {
+      transform: scale(0.97);
     }
 
-    .active {
-      display: flex;
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .status {
-      margin-top: 18px;
-      font-size: 14px;
-    }
+    .page { display: none; }
+    .active { display: flex; }
 
-    .success {
-      color: #16a34a;
-    }
+    .status { margin-top: 18px; font-size: 14px; font-family: "DM Sans"; }
+    .success { color: #16a34a; }
+    .failed { color: #dc2626; }
 
-    .failed {
-      color: #dc2626;
-    }
-
-    .code-box {
+    pre {
       margin-top: 20px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       background: #f5f5f5;
+      border-radius: 12px;
       border: 1px solid #eee;
-      border-radius: 14px;
-      font-size: 14px;
+      font-size: 13px;
+      overflow-x: auto;
       font-family: monospace;
     }
 
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .overlay.show {
-      display: flex;
-    }
-
-    .modal {
-      width: 90%;
-      max-width: 720px;
-      border-radius: 24px;
-      padding: 40px;
-      background: rgba(30, 30, 35, 0.55);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      animation: pop 0.25s ease;
-    }
-
-    @keyframes pop {
-      from {
-        transform: scale(0.95);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .modal h1 {
-      font-size: 32px;
-      margin: 0;
-    }
-
-    .modal p {
-      margin-top: 12px;
-      color: #aaa;
-      line-height: 1.6;
-    }
-
-    .modal-actions {
-      margin-top: 30px;
-      display: flex;
-      gap: 16px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #5b6cff, #7c8cff);
-      color: #fff;
-      border: none;
-      padding: 14px 22px;
-      border-radius: 14px;
-      cursor: pointer;
+    @media (max-width: 480px) {
+      h1 { font-size: 30px; }
     }
 
     @media (min-width: 768px) {
       h1 { font-size: 56px; }
       .nav { padding: 20px 40px; }
+      .nav-left { gap: 24px; }
     }
   </style>
 </head>
@@ -254,21 +197,12 @@
       <span onclick="goSupport()">Support</span>
     </div>
 
-    <div class="nav-right">
-      <button class="add-btn" onclick="addBot()">
-        Add Bot
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <button class="add-btn" onclick="openDashboard()">
-        Dashboard
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
+    <button class="add-btn" onclick="addBot()">
+      Add Bot
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
 
   <div id="home" class="container page active">
@@ -279,22 +213,9 @@
 
   <div id="payment" class="container page">
     <h1>Complete your donation</h1>
-    <div class="code-box">Proceed to secure payment</div>
+    <pre><code>Proceed to secure payment</code></pre>
     <button class="btn" onclick="pay()">Continue</button>
     <div id="status" class="status"></div>
-  </div>
-
-  <div id="overlay" class="overlay">
-    <div class="modal">
-      <h1>Under construction</h1>
-      <p>
-        The dashboard is currently being built. We're working on bringing everything together into a seamless experience.
-      </p>
-
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="addBot()">Add to your server</button>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -308,10 +229,6 @@
 
     function addBot() {
       window.open("https://discord.com/oauth2/authorize?client_id=1479942416676028579&permissions=8&scope=bot%20applications.commands", "_blank");
-    }
-
-    function openDashboard() {
-      document.getElementById("overlay").classList.add("show");
     }
 
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
@@ -342,12 +259,6 @@
         el.className = "status failed";
       }
     }
-
-    document.getElementById("overlay").addEventListener("click", function (e) {
-      if (e.target.id === "overlay") {
-        e.target.classList.remove("show");
-      }
-    });
 
     checkStatus();
   </script>
