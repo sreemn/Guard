@@ -20,6 +20,9 @@
   <meta name="twitter:description" content="Designed to work seamlessly.">
   <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
 
+  <link rel="icon" href="/favicon.ico">
+  <meta name="theme-color" content="#000000">
+
   <style>
     @font-face {
       font-family: "Smythe";
@@ -61,6 +64,12 @@
 
     .nav-left span {
       cursor: pointer;
+      font-family: "DM Sans", sans-serif;
+      transition: opacity 0.2s;
+    }
+
+    .nav-left span:hover {
+      opacity: 0.6;
     }
 
     .add-btn {
@@ -76,15 +85,21 @@
       font-family: "DM Sans", sans-serif;
       cursor: pointer;
       transition: 0.2s;
+      letter-spacing: -0.01em;
     }
 
     .add-btn svg {
       width: 16px;
       height: 16px;
+      transition: transform 0.2s;
     }
 
     .add-btn:hover {
       background: #eaeaea;
+    }
+
+    .add-btn:hover svg {
+      transform: translate(2px, -2px);
     }
 
     .add-btn:active {
@@ -114,6 +129,7 @@
       font-size: 15px;
       color: #666;
       max-width: 400px;
+      font-family: "DM Sans", sans-serif;
     }
 
     .btn {
@@ -127,6 +143,7 @@
       font-size: 16px;
       font-family: "DM Sans", sans-serif;
       transition: 0.2s;
+      letter-spacing: -0.01em;
     }
 
     .btn:hover {
@@ -144,7 +161,7 @@
     .page { display: none; }
     .active { display: flex; }
 
-    .status { margin-top: 18px; font-size: 14px; }
+    .status { margin-top: 18px; font-size: 14px; font-family: "DM Sans"; }
     .success { color: #16a34a; }
     .failed { color: #dc2626; }
 
