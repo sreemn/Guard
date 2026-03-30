@@ -9,17 +9,6 @@
   <meta name="title" content="Vylee">
   <meta name="description" content="Designed to work seamlessly.">
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vylee.vercel.app/">
-  <meta property="og:title" content="Vylee">
-  <meta property="og:description" content="Designed to work seamlessly.">
-  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vylee">
-  <meta name="twitter:description" content="Designed to work seamlessly.">
-  <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1484490832521461780/1485362781858435192/image.png">
-
   <link rel="icon" href="/favicon.ico">
   <meta name="theme-color" content="#000000">
 
@@ -34,15 +23,36 @@
       src: url("https://reminders.click/_woff/v2/DMSans_opsz_wght__1/DMSans_opsz_wght__1-english.woff2") format("woff2");
     }
 
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      color: inherit;
+    }
+
+    button:focus,
+    button:active {
+      outline: none;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
     body {
       margin: 0;
-      font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+      font-family: "DM Sans", system-ui, sans-serif;
       background: #fff;
       color: #000;
       display: flex;
       flex-direction: column;
       min-height: 100dvh;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
     .nav {
@@ -72,13 +82,12 @@
     .add-btn {
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
       padding: 8px 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid #e5e5e5;
       background: #f5f5f5;
       font-size: 13px;
-      cursor: pointer;
       transition: 0.2s;
     }
 
@@ -116,7 +125,7 @@
       align-items: center;
       justify-content: space-between;
       background: #f3f3f3;
-      border-radius: 12px;
+      border-radius: 999px;
       padding: 10px 14px;
       max-width: 560px;
       width: 100%;
@@ -131,13 +140,11 @@
     }
 
     .copy-btn {
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      opacity: 0.6;
-      transition: 0.2s;
       display: flex;
       align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      transition: 0.2s;
     }
 
     .copy-btn:hover {
@@ -151,11 +158,13 @@
 
     .btn {
       margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 12px 22px;
-      border-radius: 12px;
+      border-radius: 20px;
       border: 1px solid #e5e5e5;
       background: #f5f5f5;
-      cursor: pointer;
       font-size: 15px;
       transition: 0.2s;
     }
@@ -215,7 +224,7 @@
       <span onclick="goSupport()">Support</span>
     </div>
 
-    <button class="add-btn" onclick="addBot()">Dashboard</button>
+    <button class="add-btn" onclick="addBot()">Add Bot</button>
   </div>
 
   <div id="home" class="container page active">
@@ -255,7 +264,7 @@
     }
 
     function addBot() {
-      window.open("https://dash.guard.app/", "_blank");
+      window.open("https://discord.com/oauth2/authorize?client_id=1479942416676028579&permissions=8&scope=bot%20applications.commands", "_blank");
     }
 
     const PAYMENT_LINK = "https://payments.cashfree.com/forms/vylee";
@@ -288,26 +297,6 @@
         `;
       }, 1400);
     }
-
-    function checkStatus() {
-      const params = new URLSearchParams(window.location.search);
-      const status = params.get("status");
-      const el = document.getElementById("status");
-
-      if (status === "success") {
-        showPayment();
-        el.innerText = "Payment successful.";
-        el.className = "status success";
-      }
-
-      if (status === "failed") {
-        showPayment();
-        el.innerText = "Payment failed. Please try again!";
-        el.className = "status failed";
-      }
-    }
-
-    checkStatus();
   </script>
 
 </body>
